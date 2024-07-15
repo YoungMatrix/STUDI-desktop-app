@@ -2,10 +2,12 @@
 
 # Import necessary libraries
 import html
+import platform
 import sys
 import os
 import tkinter as tk
 from tkinter import Scrollbar, font, messagebox
+from tkinter import ttk
 from tkinter.ttk import Style, Treeview
 from tkcalendar import Calendar
 from datetime import datetime
@@ -45,8 +47,12 @@ def create_app():
     # Create the main window
     root = tk.Tk()
     root.title("Application bureautique")
-    canvas_height = 605
-    canvas_width = 250
+    if platform.system() == "Darwin":  # macOS
+        canvas_height = 605
+        canvas_width = 250
+    else:  # Windows or Linux
+        canvas_height = 725
+        canvas_width = 280
     root.geometry(str(canvas_width * 2) + "x" + str(canvas_height // 2))
     root.resizable(False, False)
 
@@ -83,11 +89,17 @@ def create_app():
     text_widget.tag_configure("bold_italic", font=bold_italic_font)
 
     # Create a window for the text widget with specified dimensions
-    canvas.create_window(canvas_width, 80, height=50, window=text_widget)
+    if platform.system() == "Darwin":  # macOS
+        canvas.create_window(canvas_width, 80, height=50, window=text_widget)
+    else:  # Windows or Linux
+        canvas.create_window(canvas_width, 100, height=60, width=canvas_width * 2, window=text_widget)
 
     # Create a frame for the textboxes and buttons with rounded corners
     form_frame = tk.Frame(root, width=200, bg="#f0f0f0")
-    canvas.create_window(canvas_width, 195, window=form_frame)
+    if platform.system() == "Darwin":  # macOS
+        canvas.create_window(canvas_width, 195, window=form_frame)
+    else:  # Windows or Linux
+        canvas.create_window(canvas_width, 245, window=form_frame)
 
     # Create textboxes for e-mail and password
     email_label = tk.Label(form_frame, text="E-mail:", font=(config.FONT_NAME, 12), bg="#f0f0f0", fg="black")
@@ -103,17 +115,15 @@ def create_app():
     password_entry.pack(fill="both", pady=(0, 10))
 
     # Create a button to show/hide password
-    show_password_button = tk.Button(form_frame, text="Afficher", font=(config.FONT_NAME, 12),
-                                     command=lambda: toggle_password_visibility(password_entry, show_password_button), bg="#f0f0f0", bd=0, highlightthickness=0, highlightbackground="#f0f0f0")
+    show_password_button = ttk.Button(form_frame, text="Afficher", command=lambda: toggle_password_visibility(password_entry, show_password_button))
     show_password_button.pack(expand=True, fill="both", pady=(5, 0))
 
     # Create a confirm button
-    confirm_button = tk.Button(form_frame, text="Confirmer", font=(config.FONT_NAME, 12), 
-                               command=lambda: confirm_connection(email_entry.get(), password_entry.get()), bg="#f0f0f0", bd=0, highlightthickness=0, highlightbackground="#f0f0f0")
+    confirm_button = ttk.Button(form_frame, text="Confirmer", command=lambda: confirm_connection(email_entry.get(), password_entry.get()))
     confirm_button.pack(expand=True, fill="both", pady=(5, 0))
 
     # Create a quit button
-    quit_button = tk.Button(form_frame, text="Quitter", font=(config.FONT_NAME, 12), command=lambda: quit_app(root), bg="#f0f0f0", bd=0, highlightthickness=0, highlightbackground="#f0f0f0")
+    quit_button = ttk.Button(form_frame, text="Quitter", command=lambda: quit_app(root))
     quit_button.pack(expand=True, fill="both", pady=(5, 0))
 
     # Return the root
@@ -131,7 +141,10 @@ def gui_connection(secretary):
     root = tk.Tk()
     root.title("Application bureautique")
     canvas_height = 1155
-    canvas_width = 250
+    if platform.system() == "Darwin":  # macOS
+        canvas_width = 250
+    else:  # Windows or Linux
+        canvas_width = 290
     root.geometry(str(canvas_width * 2) + "x" + str(canvas_height // 2))
     root.resizable(False, False)
 
@@ -169,7 +182,10 @@ def gui_connection(secretary):
     # Create a Calendar widget to choose the date
     today = datetime.now()
     calendar_frame = tk.Frame(root, bg="#f0f0f0", bd=1, relief="solid")
-    calendar_frame.place(x=canvas_width / 2, y=100, width=250, height=180)
+    if platform.system() == "Darwin":  # macOS
+        calendar_frame.place(x=canvas_width / 2, y=100, width=250, height=180)
+    else:  # Windows or Linux
+        calendar_frame.place(x=canvas_width / 2 + 20, y=120, width=250, height=180)
     cal = Calendar(calendar_frame, font=(config.FONT_NAME, 12), selectmode="day", year=today.year, month=today.month, day=today.day, 
                    background="white", foreground="black", selectforeground="red")
     cal.pack(fill="both", expand=True)
@@ -178,8 +194,11 @@ def gui_connection(secretary):
     table_width = canvas_width * 2 - 20
     table_height = 200
     table_frame = tk.Frame(root, bg="#f0f0f0")
-    table_frame.place(x=10, y=300, width=table_width, height=table_height)
-
+    if platform.system() == "Darwin":  # macOS
+        table_frame.place(x=10, y=300, width=table_width, height=table_height)
+    else:  # Windows or Linux
+        table_frame.place(x=10, y=310, width=table_width, height=table_height)
+    
     # Create the table
     columns = ("ID", "Nom", "Prénom", "Adresse", "Email")
     table = Treeview(table_frame, columns=columns, show="headings")
@@ -213,11 +232,11 @@ def gui_connection(secretary):
     canvas.create_window(canvas_width, 535, window=form_frame)
 
     # Create a confirm button
-    confirm_button = tk.Button(form_frame, text="Confirmer", font=(config.FONT_NAME, 12), command=lambda: confirm_date(cal, table), bg="#f0f0f0", bd=0, highlightthickness=0, highlightbackground="#f0f0f0")
+    confirm_button = ttk.Button(form_frame, text="Confirmer", command=lambda: confirm_date(cal, table))
     confirm_button.pack(expand=True, fill="both", pady=(5, 0))
 
     # Create a return button
-    return_button = tk.Button(form_frame, text="Retour", font=(config.FONT_NAME, 12), command=root.destroy, bg="#f0f0f0", bd=0, highlightthickness=0, highlightbackground="#f0f0f0")
+    return_button = ttk.Button(form_frame, text="Retour", command=root.destroy)
     return_button.pack(expand=True, fill="both", pady=(5, 0))
 
     # Return the root
@@ -231,7 +250,10 @@ def gui_patient_information(update_patient):
     # Create the main window
     root = tk.Tk()
     root.title("Application bureautique")
-    canvas_width = 150
+    if platform.system() == "Darwin":  # macOS
+        canvas_width = 150
+    else:  # Windows or Linux
+        canvas_width = 200
     first_position = 60
     distance_position = 30
 
@@ -328,7 +350,7 @@ def gui_patient_information(update_patient):
     next_position += distance_position
 
     # Create a return button
-    return_button = tk.Button(form_frame, text="Retour", font=(config.FONT_NAME, 12), command=root.destroy, bg="#f0f0f0", bd=0, highlightthickness=0, highlightbackground="#f0f0f0")
+    return_button = ttk.Button(form_frame, text="Retour", command=root.destroy)
     return_button.pack(expand=True, fill="both", pady=(5, 0))
 
     # Adjust the main window especially for the height
@@ -366,8 +388,17 @@ def confirm_date(cal, table):
     :param cal: Calendar object.
     :param table: Treeview object to display the list of patients.
     """
-    # Convert the selected date string to a datetime object
-    selected_date = datetime.strptime(cal.get_date(), "%d/%m/%Y").date()
+    try:
+        # Try to parse the date with the first format
+        selected_date = datetime.strptime(cal.get_date(), "%d/%m/%Y").date()
+    except ValueError:
+        try:
+            # Try to parse the date with the second format
+            selected_date = datetime.strptime(cal.get_date(), "%m/%d/%y").date()
+        except ValueError:
+            # Handle the case where neither format works
+            messagebox.showerror("Erreur", "Format de date incorrect. Veuillez contacter l'administrateur.")
+            return []
 
     # Retrieve the list of patients for the selected date
     patientList = success_patient_list_retrieval(selected_date)
@@ -413,8 +444,16 @@ def on_patient_double_click(event, table, cal):
         email=selected_patient_data['values'][4]
     )
 
-    # Convert the selected date string to a datetime object
-    selected_date = datetime.strptime(cal.get_date(), "%d/%m/%Y").date()
+    try:
+        # Try to parse the date with the first format
+        selected_date = datetime.strptime(cal.get_date(), "%d/%m/%Y").date()
+    except ValueError:
+        try:
+            # Try to parse the date with the second format
+            selected_date = datetime.strptime(cal.get_date(), "%m/%d/%y").date()
+        except ValueError:
+            # Handle the case where neither format works
+            messagebox.showerror("Erreur", "Format de date incorrect. Veuillez contacter l'administrateur.")
 
     # Update patient information based on the current date selected in the calendar
     updated_selected_patient = success_information_patient_retrieval(selected_patient, selected_date)

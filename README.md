@@ -1,60 +1,48 @@
-# Setup Instructions
+# STUDI Mobile Application
 
-## Prerequisites
-- Python 3 should be installed on your system.
-- Make sure to add Python 3 to your PATH environment variable.
-- Install the MySQL Connector Python library using pip:
-    - `pip3 install mysql-connector-python`
-- Install the Python dotenv library using pip:
-    - `pip3 install python-dotenv`
+## Requirements
+- **VS Studio Code** version >= 1.91.0
+  - Python Extension version >= 2024.10.0
+- **XAMPP** version >= 8.2.12 with Control Panel version >= 3.3.0
+- **Python3** version => 3.7.9 with libraries:
+    - **python-dotenv**: `pip3 install python-dotenv`.
+    - **mysql-connector-python**: `pip3 install mysql-connector-python`. 
+- **Database connection parameters** (online or local database).
 
-## Configuration
-- Set the following environment variables in a `.env` file in the root directory of your project:
-    - `DB_HOST`: The hostname of your MySQL database.
-    - `DB_USER`: The username for connecting to the MySQL database.
-    - `DB_PASSWORD`: The password for the MySQL user.
-    - `DB_DATABASE`: The name of the MySQL database.
-    - `DB_PORT`: The port number on which MySQL is running.
+## Steps to Prepare the Application for Windows
 
-## Development Setup
-- Make sure to select the correct Python interpreter in your IDE (e.g., Visual Studio Code).
-- Ensure that the environment variables mentioned above are set correctly in your `.env` file.
+### Clone Repository
+1. Open VS Studio Code.
+2. In the terminal:
+   ```bash
+   git clone https://github.com/YoungMatrix/STUDI-desktop-app
+3. Login to GIT if necessary.
 
-## Usage
-- Use the provided classes and functions to interact with your MySQL database.
-- Modify the code according to your specific requirements.
+### Setup Environment
+4. In VS Studio Code, open the directory directly in STUDI-mobile-app.
+5. Create .env file in /app directory with the following content:
+    # File verified
 
-## Example Usage
-```python
-# Importing necessary libraries
-import mysql.connector
-import os
-from dotenv import load_dotenv
+    # Database connection parameters (online or local database)
+    DB_HOST=To Be Completed
 
-# Load environment variables from the .env file
-load_dotenv()
+    DB_USER=TBC
 
-# Retrieve the values of environment variables
-DB_HOST = os.getenv("DB_HOST")
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_DATABASE = os.getenv("DB_DATABASE")
-DB_PORT = int(os.getenv("DB_PORT"))
+    DB_PASSWORD=TBC
 
-# Import the Database class from the utilities module
-from utilities.classes.database import Database
+    DB_DATABASE=TBC
 
-# Create an instance of the Database class
-db = Database(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_DATABASE, port=DB_PORT)
+    DB_PORT=TBC
 
-# Connect to the database
-db.connect()
+    # Pepper used for hashing passwords
+    PEPPER=Studi
 
-# Execute queries or prepared queries
+### Database Setup
+6. Start Apache and MySQL from XAMPP Control Panel.
+7. Open MySQL as admin.
+8. In phpMyAdmin, create a new database named ecf_studi_verified.
+9. Import the file ecf_studi_verified.sql from STUDI-mobile-app/db directory into the newly created database.
 
-# Example:
-# results = db.execute_query("SELECT * FROM table_name")
-# results = db.execute_prepared_query("SELECT * FROM table_name WHERE id = ?", (1,))
-
-# Disconnect from the database when finished
-db.disconnect()
+### Steps to Launch the Application for Windows
+10. Go to main.py file in STUDI-mobile-app/app.
+11. Run the file.
