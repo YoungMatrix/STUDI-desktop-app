@@ -1,7 +1,7 @@
 # STUDI Mobile Application
 
 ## Requirements
-- **VS Studio Code** version >= 1.91.0
+- **Visual Studio Code** version >= 1.91.0
   - Python Extension version >= 2024.10.0
 - **XAMPP** version >= 8.2.12 with Control Panel version >= 3.3.0
 - **Python3** version => 3.7.9 with libraries:
@@ -12,14 +12,14 @@
 ## Steps to Prepare the Application for Windows
 
 ### Clone Repository
-1. Open VS Studio Code.
+1. Open Visual Studio Code.
 2. In the terminal:
    ```bash
    git clone https://github.com/YoungMatrix/STUDI-desktop-app
 3. Login to GIT if necessary.
 
 ### Setup Environment
-4. In VS Studio Code, open the directory directly in STUDI-mobile-app.
+4. In Visual Studio Code, open the directory directly in STUDI-mobile-app.
 5. Create .env file in /app directory with the following content:
     # File verified
 
