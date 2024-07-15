@@ -48,7 +48,7 @@ def create_app():
     root = tk.Tk()
     root.title("Application bureautique")
     if platform.system() == "Darwin":  # macOS
-        canvas_height = 605
+        canvas_height = 615
         canvas_width = 250
     else:  # Windows or Linux
         canvas_height = 725
@@ -90,7 +90,7 @@ def create_app():
 
     # Create a window for the text widget with specified dimensions
     if platform.system() == "Darwin":  # macOS
-        canvas.create_window(canvas_width, 80, height=50, window=text_widget)
+        canvas.create_window(canvas_width, 75, height=50, window=text_widget)
     else:  # Windows or Linux
         canvas.create_window(canvas_width, 100, height=60, width=canvas_width * 2, window=text_widget)
 
