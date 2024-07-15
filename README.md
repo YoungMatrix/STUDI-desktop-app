@@ -5,8 +5,8 @@
   - Python Extension version >= 2024.10.0
 - **XAMPP** version >= 8.2.12 with Control Panel version >= 3.3.0
 - **Python3** version => 3.7.9 with libraries:
-    - **python-dotenv**: `pip3 install python-dotenv`.
-    - **mysql-connector-python**: `pip3 install mysql-connector-python`. 
+    - **python-dotenv**: `pip3 install python-dotenv`
+    - **mysql-connector-python**: `pip3 install mysql-connector-python`
 - **Database connection parameters** (online or local database).
 
 ## Steps to Prepare the Application for Windows
