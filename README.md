@@ -1,4 +1,4 @@
-# STUDI Mobile Application
+# STUDI Desktop Application
 
 ## Requirements
 - **Visual Studio Code** version >= 1.91.0
@@ -19,7 +19,7 @@
 3. Login to GIT if necessary.
 
 ### Setup Environment
-4. In Visual Studio Code, open the directory directly in STUDI-mobile-app.
+4. In Visual Studio Code, open the directory directly in STUDI-desktop-app.
 5. Create .env file in /app directory with the following content:
     # File verified
 
@@ -41,8 +41,8 @@
 6. Start Apache and MySQL from XAMPP Control Panel.
 7. Open MySQL as admin.
 8. In phpMyAdmin, create a new database named ecf_studi_verified.
-9. Import the file ecf_studi_verified.sql from STUDI-mobile-app/db directory into the newly created database.
+9. Import the file ecf_studi_verified.sql from STUDI-desktop-app/db directory into the newly created database.
 
 ### Steps to Launch the Application for Windows
-10. Go to main.py file in STUDI-mobile-app/app.
+10. Go to main.py file in STUDI-desktop-app/app.
 11. Run the file.
